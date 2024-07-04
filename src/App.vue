@@ -9,6 +9,9 @@
   height: 100%;
   position: relative;
 }
+button {
+  cursor: pointer;
+}
 body {
   position: relative;
   margin: 0;
