@@ -1,14 +1,20 @@
 <template>
   <div class="register_view">
     <div class="register_frame">
-      <input :placeholder="'Username'" class="username" />
-      <input :placeholder="'Password'" type="password" class="password" />
+      <input v-model="username" :placeholder="'Username'" class="username" />
       <input
+        v-model="password"
+        :placeholder="'Password'"
+        type="password"
+        class="password"
+      />
+      <input
+        v-model="password2"
         :placeholder="'Confirm password'"
         type="password"
         class="password"
       />
-      <button class="register_button">REGISTER</button>
+      <button @click="register" class="register_button">REGISTER</button>
       <button @click="goToLogin" class="already_have_an_account">
         ALREADY HAVE AN ACCOUNT?
       </button>
@@ -17,14 +23,27 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "RegisterView",
   data() {
-    return {};
+    return {
+      username: "",
+      password: "",
+      password2: "",
+    };
   },
   methods: {
     goToLogin() {
       this.$router.push("/login");
+    },
+    async register() {
+      await axios.post("http://127.0.0.1:8000", {
+        username: this.username,
+        password: this.password,
+        password2: this.password2,
+      });
     },
   },
 };
